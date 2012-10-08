@@ -3,6 +3,8 @@
 <html>
 <head>
 <?include('includes/bootstrap.inc.php');?>
+<script src="scripts/js/misc.js"></script>
+<link rel="stylesheet" href="css/style.css"/>
 <meta http-equiv="Content-Type" content="application/xhtml+xm; charset=utf-8" />
 <?header ('Content-type: text/html; charset=utf-8');?>
 <title>Cloud Music</title>
@@ -18,6 +20,7 @@
 <body>
 <h1>Cloud<a href="#">Music</a></h1>
 &nbsp; An online music composer / repository
+<!--<a id="timer"></a>--><br>
 <div class='pull-right'>
 	<!-- show these buttons only if not logged in -->
 	<button class='btn btn-primary' onclick='load_modal("header","body");'>Signup</button>
@@ -72,6 +75,19 @@
 		document.getElementById("form_modal_submit").value=submit;
 	}
 </script>
+<div id="keys" style="padding-top:150px;">
+<img id="65_key"src="images/key.jpg" />
+<img id="83_key"src="images/key.jpg" />
+<img id="68_key"src="images/key.jpg" />
+<img id="70_key"src="images/key.jpg" />
+<img id="71_key"src="images/key.jpg" />
+<img id="72_key"src="images/key.jpg" />
+<img id="74_key"src="images/key.jpg" />
+<img id="75_key"src="images/key.jpg" />
+<img id="76_key"src="images/key.jpg" />
+<img id="59_key"src="images/key.jpg" />
+<img id="39_key"src="images/key.jpg" />
+</div>
 <!-- music libary -->
 <? include("includes/sounds.inc");?> 
 <!-- music handler -->
