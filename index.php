@@ -32,18 +32,19 @@
 <!-- this is the modal for everything without a form-->
 <div class="modal hide fade" id="modal">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">×</button>
+    <button type="button" class="close" data-dismiss="modal" onclick="toggle_mode();">×</button>
     <h3 id='modal_header'>Default Header</h3>
   </div>
   <div class="modal-body" id='modal_body' >
   Default body
   </div>
   <div class="modal-footer">
-    <a href="#" class="btn" data-dismiss="modal">Close</a>
+    <a href="#" class="btn" data-dismiss="modal" onclick="toggle_mode();">Close</a>
   </div>
 </div>
 <script type='text/javascript'>
 	function load_modal(header,body){
+		toggle_mode();
 		$('#modal').modal('show');
 		document.getElementById("modal_header").innerHTML=header;
 		document.getElementById("modal_body").innerHTML=body;
@@ -53,7 +54,7 @@
 <!-- this is a modal for everything with a form -->
 <div class="modal hide fade" id="form_modal">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">×</button>
+    <button type="button" class="close" data-dismiss="modal" onclick="toggle_mode();">×</button>
     <h3 id='form_modal_header'>Default Header</h3>
   </div>
   <form method='post' action='' id='form_modal_action'>
@@ -61,13 +62,14 @@
   	Default body
   	</div>
   	<div class="modal-footer">
-    	<a href="#" class="btn" data-dismiss="modal">Close</a>
+    	<a href="#" class="btn" data-dismiss="modal" onclick="toggle_mode();">Close</a>
 	<input type='submit' class='btn btn-primary' value='Submit' id='form_modal_submit'>
   	</div>
    </form>
 </div>
 <script type='text/javascript'>
 	function load_form_modal(header,action,body,submit){
+		toggle_mode();
 		$('#form_modal').modal('show');
 		document.getElementById("form_modal_header").innerHTML=header;
 		document.getElementById("form_modal_action").action=action;
@@ -75,19 +77,7 @@
 		document.getElementById("form_modal_submit").value=submit;
 	}
 </script>
-<div id="keys" style="padding-top:150px;">
-<img id="65_key"src="images/key.jpg" />
-<img id="83_key"src="images/key.jpg" />
-<img id="68_key"src="images/key.jpg" />
-<img id="70_key"src="images/key.jpg" />
-<img id="71_key"src="images/key.jpg" />
-<img id="72_key"src="images/key.jpg" />
-<img id="74_key"src="images/key.jpg" />
-<img id="75_key"src="images/key.jpg" />
-<img id="76_key"src="images/key.jpg" />
-<img id="59_key"src="images/key.jpg" />
-<img id="39_key"src="images/key.jpg" />
-</div>
+<? include("includes/keyboard.inc"); ?>
 <!-- music libary -->
 <? include("includes/sounds.inc");?> 
 <!-- music handler -->
