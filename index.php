@@ -1,4 +1,6 @@
 <?php include('config.php');?>
+<?php include("scripts/php/basic_functions.php");?>
+<?ini_set('display_errors', 'On');?>
 <!doctype html>
 <html>
 <head>
@@ -18,13 +20,14 @@
 </style>
 </head>
 <body>
-<h1>Cloud<a href="#">Music</a></h1>
+<h1>Cloud<a href="<?echo $config['base_url'];?>">Music</a></h1>
 &nbsp; An online music composer / repository
 <!--<a id="timer"></a>--><br>
 <div class='pull-right'>
 	<!-- show these buttons only if not logged in -->
-	<button class='btn btn-primary' onclick='load_modal("header","body");'>Signup</button>
-	<button class='btn btn-success' onclick='load_form_modal("Enter your login details","scripts/php/basic_functions.php?action=login","<input name=\"login_username\" type=\"text\" placeholder=\"user name\"/><br><input name=\"login_password\"type=\"password\" placeholder=\"password\"/>","login");'>Login</button>
+	<button class='btn btn-primary' onclick='load_form_modal("Quick Signup","scripts/php/accounts.php?action=signup","<input name=\"first_name\" type=\"text\" placeholder=\"First Name\"/><br><input name=\"last_name\" type=\"text\" placeholder=\"Last Name\"/><br><input name=\"user_name\" type=\"text\" placeholder=\"username\"/><br><input name=\"email\" type=\"text\" placeholder=\"email\"/><br><input name=\"password\"type=\"password\" placeholder=\"password\"/><br><input name=\"confirm_password\"type=\"password\" placeholder=\"confirm password\"/><br><select name=\"user_type\" value=\"-1\"><option value=\"pro composer\">pro composer</option><option value=\"composer\">composer</option><option value=\"learner\">learner</option><option value=\"music_lover\">I Just Love Music</option></select><br><input name=\"terms\" value=\"1\" type=\"checkbox\"/> &nbsp;&nbsp;&nbsp;I agree to terms and conditions","Signup");'>Signup</button>
+
+	<button class='btn btn-success' onclick='load_form_modal("Enter your login details","scripts/php/accounts.php?action=login","<input name=\"login_username\" type=\"text\" placeholder=\"user name\"/><br><input name=\"login_password\"type=\"password\" placeholder=\"password\"/>","login");'>Login</button>
 </div>
 	<!-- show logout and account settings button if logged in -->
 
@@ -82,5 +85,14 @@
 <? include("includes/sounds.inc");?> 
 <!-- music handler -->
 <script src="scripts/js/music.js"></script>
+<script type="text/javascript">
+	function alerts(){
+		if("<?echo $_GET["error"]; ?>")
+			load_modal("Error!!!","<?echo $_GET['error'];?>");
+		else if("<?echo $_GET["message"]; ?>")
+			load_modal("<?echo $_GET['message_head'];?>","<?echo $_GET['message'];?>");
+	}
+	setTimeout("alerts();","0");
+</script>
 </body>
 </html>
