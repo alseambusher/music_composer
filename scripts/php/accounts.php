@@ -5,10 +5,26 @@ signup
 */
 include("../../config.php");
 include_once("basic_functions.php");
-if($_GET['action']=='login'){
-	print_r($_POST);
+switch($_GET['action']){
+	case "login": login();break;
+	case "signup": signup();break;
+	case "logout": logout();
 }
-else if($_GET['action']=="signup"){
+
+function login(){
+	include("connect.php");
+	$user_name=sql_inject_clean($_POST['login_username']);
+	$password=sql_inject_clean($_POST['login_password']);
+	$query=mysqli_query($connect,"select * from users where user_name='".$user_name."' and password='".$password."'");
+	if(mysqli_num_rows($query)>0){
+		session_start();
+		$_SESSION['id']=get_user_id($user_name);
+		header("Location:".$config['base_url']);
+	}
+	else
+		header("Location:".$config['base_url']."/?error=Login%20Failed!!");
+}
+function signup(){
 	if(!isset($_POST['terms']))
 		header("Location:".$config['base_url']."/?error=Please%20agree%20to%20terms%20and%20conditions%20and%20Try%20again");
 	else if(!(isset($_POST['first_name'])&&isset($_POST['last_name'])&&isset($_POST['user_name'])&&isset($_POST['email'])&&isset($_POST['password'])&&isset($_POST['confirm_password'])&&isset($_POST['user_type']))){
@@ -52,5 +68,13 @@ else if($_GET['action']=="signup"){
 			header("Location:".$config['base_url']."/?message_head=Signup%20Successful&message=Signup%20Complete..%20Now%20you%20can%20login");
 		}
 	}
+}
+function logout(){
+	session_start();
+	if(isLogin()){
+		$_SESSION=array();
+		session_destroy();
+	}
+	header("Location:".$config['base_url']);
 }
 ?>

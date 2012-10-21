@@ -30,4 +30,11 @@ function sql_inject_clean($string){
 	include("connect.php");
 	return mysqli_real_escape_string($connect,$string);
 }
+function islogin(){
+	session_start();
+	if(isset($_SESSION['id']))
+		if($_SESSION['id']!=NULL)
+			return true;
+	return false;
+}
 ?>
