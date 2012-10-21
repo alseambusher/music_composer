@@ -1,8 +1,10 @@
-<?php include('config.php');?>
+<?//ini_set('display_errors', 'On');?>
+<?session_start();?>
 <?php include("scripts/php/basic_functions.php");?>
 <!doctype html>
 <html>
 <head>
+<?include('config.php');?>
 <?include('includes/bootstrap.inc.php');?>
 <script src="scripts/js/misc.js"></script>
 <link rel="stylesheet" href="css/style.css"/>
@@ -30,8 +32,9 @@
 	<button class='btn btn-success' onclick='load_form_modal("Enter your login details","scripts/php/accounts.php?action=login","<input name=\"login_username\" type=\"text\" placeholder=\"user name\"/><br><input name=\"login_password\"type=\"password\" placeholder=\"password\"/>","login");'>Login</button>
 
 	<?}else{?>
-	<button class="btn btn-primary">Account Settings</button>
-	<button class="btn btn-success">Logout</button>
+	<button class='btn btn-primary' onclick='load_form_modal("Quick Signup","scripts/php/accounts.php?action=update","<input name=\"first_name\" type=\"text\" placeholder=\"First Name\"/><br><input name=\"last_name\" type=\"text\" placeholder=\"Last Name\"/><br><input name=\"user_name\" type=\"text\" placeholder=\"username\"/><br><input name=\"email\" type=\"text\" placeholder=\"email\"/><br><input name=\"password\"type=\"password\" placeholder=\"password\"/><br><input name=\"confirm_password\"type=\"password\" placeholder=\"confirm password\"/><br><select name=\"user_type\" value=\"-1\"><option value=\"pro composer\">pro composer</option><option value=\"composer\">composer</option><option value=\"learner\">learner</option><option value=\"music_lover\">I Just Love Music</option></select><br><input name=\"terms\" value=\"1\" type=\"checkbox\"/> &nbsp;&nbsp;&nbsp;I agree to terms and conditions","Signup");'>Account Settings</button>
+	<a class="btn btn-success" href="scripts/php/accounts.php?action=logout">Logout</a><br>
+	<h2><?echo get_user_info("first_name",$_SESSION['id'])." ".get_user_info("last_name",$_SESSION['id']);?></h2>
 	<?}?>
 </div>
 

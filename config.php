@@ -1,5 +1,4 @@
 <?
-ini_set('display_errors', 'On');
 $config= array();
 $config['base_url']='http://localhost/music_composer';
 $config['db_host']='localhost';

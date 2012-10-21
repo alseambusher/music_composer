@@ -8,12 +8,12 @@ sql_inject_clean($string)
 function get_user_info($type=-1,$uid){
 	include("connect.php");
 	if($type==-1){//send all
-		$query=mysqli_query($connect,"select * from users where id='".$uid."'");
+		$query=mysqli_query($connect,"select * from users where id='".$uid."'") or die("cant get");
 		while($row=mysqli_fetch_array($query))
 			return $row;
 	}
 	else{
-		$query=mysqli_query($connect,"select ".$type." from users where id='".$uid."'");
+		$query=mysqli_query($connect,"select ".$type." from users where id='".$uid."'") or die("cant get");
 		while($row=mysqli_fetch_array($query))
 			return $row[$type];
 	}
