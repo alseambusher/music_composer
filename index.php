@@ -86,6 +86,8 @@
 		document.getElementById("form_modal_submit").value=submit;
 	}
 </script>
+
+
 <? if(isLogin()){?>
 <!--control -->
 <?include("includes/player_controls.inc");?>

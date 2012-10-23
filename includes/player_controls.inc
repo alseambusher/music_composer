@@ -31,6 +31,7 @@
 	cursor:pointer;
 	padding:4px;
 	margin:2px;
+	margin-left:5px;
    	-moz-border-radius:10px;
    	-webkit-border-radius:10px;
    	border-radius:10px;
@@ -49,7 +50,7 @@
 	width:0px; 
 	height:0px; 
 	margin:2px;
-	margin-left:4px;
+	margin-left:8px;
 	border-bottom:15px solid transparent;  /* left arrow slant */
 	border-top:15px solid transparent; /* right arrow slant */
 	font-size:0px;
@@ -57,9 +58,9 @@
 	-moz-border-radius:6px;
 	border-radius:6px;
 	cursor:pointer;
-	-webkit-box-shadow: 0px 0px 20px rgba(100,100,100,.4);
-   	-moz-box-shadow: 0px 0px 20px rgba(100,100,100,.4);
-   	box-shadow: 0px 0px 20px rgba(100,100,100,.4);
+	-webkit-box-shadow: 0px 0px 20px rgba(100,100,100,.2);
+   	-moz-box-shadow: 0px 0px 20px rgba(100,100,100,.2);
+   	box-shadow: 0px 0px 20px rgba(100,100,100,.2);
 
 }
 .play_button{
@@ -83,8 +84,8 @@
 </style>
 <script type="text/javascript">
 	function toggle_record(obj){
-		console.log(record_mode);
 		if(record_mode){
+			RECORD_TIMER=-1;//stop record timer thread
 			record_mode=false;//this is in system.js
 			obj.setAttribute("class","record");
 		}
@@ -98,19 +99,36 @@
 		}
 		update_player_controls();
 	}
-	function clear(){
+	function clear_data(){
 		record_mode_DATA={65:[],83:[],68:[],70:[],71:[],72:[],74:[],75:[],76:[],90:[],88:[],67:[],86:[],66:[],78:[],77:[],81:[],87:[],69:[],82:[],84:[],89:[],85:[],73:[],79:[],80:[]};
 		record_mode_DATA_blocked={65:false,83:false,68:false,70:false,71:false,72:false,74:false,75:false,76:false,90:false,88:false,67:false,86:false,66:false,78:false,77:false,81:false,87:false,69:false,82:false,84:false,89:false,85:false,73:false,79:false,80:false};
 		record_mode=false;
 		update_player_controls();
 	}
 	function update_player_controls(){
-	//TODO
+		if(JSON.stringify(record_mode_DATA)==JSON.stringify({65:[],83:[],68:[],70:[],71:[],72:[],74:[],75:[],76:[],90:[],88:[],67:[],86:[],66:[],78:[],77:[],81:[],87:[],69:[],82:[],84:[],89:[],85:[],73:[],79:[],80:[]})){
+			document.getElementById("play_button").setAttribute("class","play_button_disabled");
+		}
+		else{
+			document.getElementById("play_button").setAttribute("class","play_button");
+		}
+	}
+	function play_back(){
+		if(JSON.stringify(record_mode_DATA)!=JSON.stringify({65:[],83:[],68:[],70:[],71:[],72:[],74:[],75:[],76:[],90:[],88:[],67:[],86:[],66:[],78:[],77:[],81:[],87:[],69:[],82:[],84:[],89:[],85:[],73:[],79:[],80:[]})){
+			alert(JSON.stringify(record_mode_DATA));
+			//TODO complete this
+		}
+	}
+	function save(){
+		if(JSON.stringify(record_mode_DATA)!=JSON.stringify({65:[],83:[],68:[],70:[],71:[],72:[],74:[],75:[],76:[],90:[],88:[],67:[],86:[],66:[],78:[],77:[],81:[],87:[],69:[],82:[],84:[],89:[],85:[],73:[],79:[],80:[]})){
+			load_form_modal("Do you want to save?","scripts/php/save_load.php?action=save","<input name=\"first_name\" type=\"text\" placeholder=\"First Name\"/><br><input name=\"last_name\" type=\"text\" placeholder=\"Last Name\"/><br><input name=\"user_name\" type=\"text\" placeholder=\"username\"/><br><input name=\"email\" type=\"text\" placeholder=\"email\"/><br><input name=\"password\"type=\"password\" placeholder=\"password\"/><br><input name=\"confirm_password\"type=\"password\" placeholder=\"confirm password\"/><br><select name=\"user_type\" value=\"-1\"><option value=\"pro composer\">pro composer</option><option value=\"composer\">composer</option><option value=\"learner\">learner</option><option value=\"music_lover\">I Just Love Music</option></select><br><input name=\"terms\" value=\"1\" type=\"checkbox\"/> &nbsp;&nbsp;&nbsp;I agree to terms and conditions","Signup");
+		}
 	}
 </script>
 <div id='player_controls'>
-<div class="play_button"></div><br>
-<div class="record" onclick="toggle_record(this);"></div><br>
-<div class="save"><p>save</p></div>
-<div class="save" onclick="clear();"><p>clear</p></div>
+<div class="play_button_disabled" id="play_button" onclick="play_back();"></div><br>
+<div class="record" id="record" onclick="toggle_record(this);"></div><br>
+<div class="save"><a class='btn btn-small' onclick="save();">save</a></div><br>
+<div class="save"><a class='btn btn-small'>load</a></div><br>
+<div class="save" ><a class='btn btn-small' onclick="clear_data();">clear</a></div>
 </div>
