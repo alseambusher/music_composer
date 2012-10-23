@@ -13,8 +13,8 @@ function play_timer(){
 	if(PLAY_TIMER>0)
 		setTimeout("play_timer()",10);
 }
-RECORD_TIMER=0;
-setTimeout("record_timer();",0);
+//RECORD_TIMER=0;
+//setTimeout("record_timer();",0);
 function account_settings(){
 	load_form_modal("Account settings","#","Loading Settings..... Please Wait","Signup");
 	var xhr=new XMLHttpRequest();

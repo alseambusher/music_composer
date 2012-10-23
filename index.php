@@ -86,6 +86,11 @@
 		document.getElementById("form_modal_submit").value=submit;
 	}
 </script>
+<? if(isLogin()){?>
+<!--control -->
+<?include("includes/player_controls.inc");?>
+<?}?>
+<!--keyboard-->
 <? include("includes/keyboard.inc"); ?>
 <!-- music libary -->
 <? include("includes/sounds.inc");?> 

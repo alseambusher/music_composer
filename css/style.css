@@ -4,6 +4,9 @@ display:inline-block;
 position:fixed;
 bottom:10px;
 /*margin-left:200px;*/
+-webkit-box-shadow: 0px 0px 20px rgba(0,0,0,.8);
+   -moz-box-shadow: 0px 0px 20px rgba(0,0,0,.8);
+   box-shadow: 0px 0px 20px rgba(0,0,0,.8);
 }
 .key,.key_pressed{
 	z-index:10;
@@ -76,10 +79,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0e0e0e', end
 
 .key_help_small{
 	z-index=6;
+	text-align-center;
 	display:inline-block;
 	position:absolute;
-	margin-left:-2px;
+	margin-left:-3px;
 	margin-top:100px;
 	color:gray;
-	font-size:1.3em;
+	font-size:1.1em;
 }

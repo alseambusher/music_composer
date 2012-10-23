@@ -1,3 +1,4 @@
+<?//ini_set('display_errors', 'On');?>
 <? 
 include_once("basic_functions.php");
 switch($_GET['action']){
@@ -76,7 +77,6 @@ function logout(){
 	header("Location:".$config['base_url']);
 }
 function update(){
-	print_r($_POST);
 	if(isLogin()){
 		include("connect.php");
 		if(!isset($_POST['first_name'])||($_POST['first_name']==""))//first name no change
@@ -99,9 +99,10 @@ function update(){
 		}
 		else{
 			$email=sql_inject_clean($_POST['email']);
-			if (!preg_match("/^([a-zA-Z0-9])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-]+)+/", $email))//invalid email
-				echo "<script type='text/javascript'> document.location='".$config['base_url']."/?error=email invalid'</script>";
-				//header("Location:".$config['base_url']."/?error=email invalid");
+			if (!preg_match("/^([a-zA-Z0-9])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-]+)+/", $email)){//invalid email
+				header("Location:".$config['base_url']."/?error=email invalid");
+				return;
+			}
 		}
 
 		if(!isset($_POST['password'])||($_POST['password']=="")){//email name no change
@@ -109,13 +110,16 @@ function update(){
 		}
 		else{
 			$password=sql_inject_clean($_POST['password']);
-			if(strlen($password)<6)
-				echo "<script type='text/javascript'> document.location='".$config['base_url']."/?error=passwords should have minimum 6 characters'</script>";
-			$confirm_password=sql_inject_cleam($_POST['confirm_password']);
-			if($password!=$confirm_password)
-				echo "<script type='text/javascript'> document.location='".$config['base_url']."/?error=passwords does not match'</script>";
+			if(strlen($password)<6){
+				header("Location:".$config['base_url']."/?error=passwords should have minimum 6 characters");
+				return;
+			}
+			$confirm_password=sql_inject_clean($_POST['confirm_password']);
+			if($password!=$confirm_password){
+				header("Location:".$config['base_url']."/?error=passwords does not match");
+				return;
+			}
 		}
-
 		$query=mysqli_query($connect,"update users set first_name='".$first_name."',last_name='".$last_name."',user_name='".$user_name."',password='".$password."',email='".$email."' where id='".$_SESSION['id']."'");
 			header("Location:".$config['base_url']."/?message_head=Update Successful&message=Update Complete..");
 	}
