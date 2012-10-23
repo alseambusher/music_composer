@@ -3,10 +3,6 @@ window.onload=init;
 function init(){
 	document.getElementById("keys").setAttribute("style","margin-left:"+($(window).width()-840)/2+"px;");
 }
-function set_keys(){
-	document.getElementById("keys").setAttribute("style","margin-left:"+($(window).width()-840)/2+"px;");
-}
-setTimeout("set_keys()","0");
 
 var system_mode="KEYBOARD";
 //recorder system elements

@@ -91,6 +91,8 @@
 <? if(isLogin()){?>
 <!--control -->
 <?include("includes/player_controls.inc");?>
+<!--cloud control-->
+<?include("includes/cloud_control.inc");?>
 <?}?>
 <!--keyboard-->
 <? include("includes/keyboard.inc"); ?>

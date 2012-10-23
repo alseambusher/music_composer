@@ -2,7 +2,7 @@
 #player_controls{
 	position:fixed;
 	left:0px;
-	bottom:260px;
+	bottom:200px;
 	color:white;
 	background:white;
 	border:1px white solid;
@@ -31,7 +31,7 @@
 	cursor:pointer;
 	padding:4px;
 	margin:2px;
-	margin-left:5px;
+	margin-left:12px;
    	-moz-border-radius:10px;
    	-webkit-border-radius:10px;
    	border-radius:10px;
@@ -50,7 +50,7 @@
 	width:0px; 
 	height:0px; 
 	margin:2px;
-	margin-left:8px;
+	margin-left:15px;
 	border-bottom:15px solid transparent;  /* left arrow slant */
 	border-top:15px solid transparent; /* right arrow slant */
 	font-size:0px;
@@ -114,21 +114,53 @@
 		}
 	}
 	function play_back(){
-		if(JSON.stringify(record_mode_DATA)!=JSON.stringify({65:[],83:[],68:[],70:[],71:[],72:[],74:[],75:[],76:[],90:[],88:[],67:[],86:[],66:[],78:[],77:[],81:[],87:[],69:[],82:[],84:[],89:[],85:[],73:[],79:[],80:[]})){
-			alert(JSON.stringify(record_mode_DATA));
-			//TODO complete this
+		if(document.getElementById("play_button").getAttribute("class")=="play_button_playing"){
+			document.getElementById("play_button").setAttribute("class","play_button");
+			PLAY_TIMER=-1;//stop timer
+		}
+		else if(JSON.stringify(record_mode_DATA)!=JSON.stringify({65:[],83:[],68:[],70:[],71:[],72:[],74:[],75:[],76:[],90:[],88:[],67:[],86:[],66:[],78:[],77:[],81:[],87:[],69:[],82:[],84:[],89:[],85:[],73:[],79:[],80:[]})){
+			document.getElementById("play_button").setAttribute("class","play_button_playing");
+			PLAY_TIMER=0;
+			setTimeout("play_timer()","0");//start timer
+			play_cheatsheet(jQuery.extend(true,{},record_mode_DATA));//is in music.js we have to deep copy to retain it
 		}
 	}
 	function save(){
+		console.log(JSON.stringify(record_mode_DATA));
 		if(JSON.stringify(record_mode_DATA)!=JSON.stringify({65:[],83:[],68:[],70:[],71:[],72:[],74:[],75:[],76:[],90:[],88:[],67:[],86:[],66:[],78:[],77:[],81:[],87:[],69:[],82:[],84:[],89:[],85:[],73:[],79:[],80:[]})){
-			load_form_modal("Do you want to save?","scripts/php/save_load.php?action=save","<input name=\"first_name\" type=\"text\" placeholder=\"First Name\"/><br><input name=\"last_name\" type=\"text\" placeholder=\"Last Name\"/><br><input name=\"user_name\" type=\"text\" placeholder=\"username\"/><br><input name=\"email\" type=\"text\" placeholder=\"email\"/><br><input name=\"password\"type=\"password\" placeholder=\"password\"/><br><input name=\"confirm_password\"type=\"password\" placeholder=\"confirm password\"/><br><select name=\"user_type\" value=\"-1\"><option value=\"pro composer\">pro composer</option><option value=\"composer\">composer</option><option value=\"learner\">learner</option><option value=\"music_lover\">I Just Love Music</option></select><br><input name=\"terms\" value=\"1\" type=\"checkbox\"/> &nbsp;&nbsp;&nbsp;I agree to terms and conditions","Signup");
+			load_form_modal("Do you want to save?","scripts/php/save_load.php?action=save","<input name=\"title\" type=\"text\" placeholder=\"title\"/>&nbsp;&nbsp;If no title is given, a title is automatically generated<br><select name=\"genre\"><option value=\"classic\">classic</option><option value=\"hiphop\">hiphop</option><option value=\"rock\">rock</option><option value=\"other\">other</option><option value=\"jazz\">jazz</option><option value=\"RnB\">RnB</option></select><br><input name=\"share\" value=\"1\" type=\"checkbox\"/> &nbsp;&nbsp;&nbsp;Share with other users.<input type=\"hidden\" name=\"data\" value='"+JSON.stringify(record_mode_DATA)+"'>","Save");
+		}
+	}
+	function restore(){
+		load_modal("Operation in progress","<p id='data_result'>Restoring music data....<br>Please DONT CLOSE!!</p>");
+		var xhr=new XMLHttpRequest();
+		if(xhr){
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4){
+					if(xhr.status==200){
+						if(xhr.responseText=="no history session found")
+							document.getElementById("data_result").innerHTML="No history session found";
+						else{
+							record_mode_DATA=JSON.parse(xhr.responseText);
+							update_player_controls();
+							document.getElementById("data_result").innerHTML="Restore complete";
+						}
+					}
+					else{
+						document.getElementById("data_result").innerHTML="Some error occoured.. Try again..";
+					}
+				}
+			};
+			xhr.open("GET","scripts/php/save_load.php?action=restore");
+			xhr.send(null);
 		}
 	}
 </script>
 <div id='player_controls'>
 <div class="play_button_disabled" id="play_button" onclick="play_back();"></div><br>
 <div class="record" id="record" onclick="toggle_record(this);"></div><br>
-<div class="save"><a class='btn btn-small' onclick="save();">save</a></div><br>
-<div class="save"><a class='btn btn-small'>load</a></div><br>
-<div class="save" ><a class='btn btn-small' onclick="clear_data();">clear</a></div>
+<div class="save"><a class='btn btn-info btn-small' onclick="save();">&nbsp;SAVE&nbsp;&nbsp;</a></div><br>
+<div class="save" ><a class='btn btn-info btn-small' onclick="clear_data();">&nbsp;CLEAR</a></div><br>
+<div class="save"><a class='btn btn-info btn-small'>&nbsp;LEARN</a></div><br>
+<div class="save"><a class='btn btn-info btn-small' style='font-size:0.505em;' onclick="restore();">RESTORE</a></div><br>
 </div>

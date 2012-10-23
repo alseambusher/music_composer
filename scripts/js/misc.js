@@ -25,7 +25,6 @@ function account_settings(){
 					var out=xhr.responseText.split(":");
 					toggle_mode();//as it is already called
 					load_form_modal("Account settings","scripts/php/accounts.php?action=update","<input name=\"first_name\" type=\"text\" placeholder=\"First Name\" value=\""+out[0]+"\"/> &nbsp; First Name<br><input name=\"last_name\" type=\"text\" placeholder=\"Last Name\" value=\""+out[1]+"\"/> &nbsp; Last Name<br><input name=\"user_name\" type=\"text\" placeholder=\"username\" value=\""+out[2]+"\"/> &nbsp; User Name<br><input name=\"email\" type=\"text\" placeholder=\"email\" value=\""+out[3]+"\"/> &nbsp; email id<br><input name=\"password\"type=\"password\" placeholder=\"new password\"/> &nbsp Leave blank if you dont like to change<br><input name=\"confirm_password\"type=\"password\" placeholder=\"confirm new password\"/><br>","Update");
-					console.log(out);
 				}
 			}
 		};
