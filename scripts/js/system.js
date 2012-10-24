@@ -3,7 +3,7 @@ window.onload=init;
 function init(){
 	document.getElementById("keys").setAttribute("style","margin-left:"+($(window).width()-840)/2+"px;");
 }
-
+setTimeout("init();",10);
 var system_mode="KEYBOARD";
 //recorder system elements
 var record_mode=false;
@@ -17,4 +17,7 @@ function toggle_mode(){
 		system_mode="SCREEN";
 	else
 		system_mode="KEYBOARD";
+}
+function set_buffer_state(state){
+	document.getElementById("buffer_state").innerHTML=state;
 }

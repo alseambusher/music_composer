@@ -5,7 +5,7 @@ switch($_GET['action']){
 	case "login": login();break;
 	case "signup": signup();break;
 	case "logout": logout();break;
-	case "update": update();break;//TODO
+	case "update": update();break;
 	case "account_settings":account_settings();
 }
 

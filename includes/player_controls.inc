@@ -155,12 +155,21 @@
 			xhr.send(null);
 		}
 	}
+	function learn(){
+		$("#learnboard_holder").toggle(100);
+		document.getElementById("learnboard").innerHTML="";//reset it
+		set_learnboard(jQuery.extend(true,{},record_mode_DATA));//this will set the board
+		learn_timer=0;//reset timer
+		learnboard_interrupt=false;//stop timer
+		start_learn(jQuery.extend(true,{},record_mode_DATA));//this will make it play
+	}
 </script>
 <div id='player_controls'>
 <div class="play_button_disabled" id="play_button" onclick="play_back();"></div><br>
 <div class="record" id="record" onclick="toggle_record(this);"></div><br>
 <div class="save"><a class='btn btn-info btn-small' onclick="save();">&nbsp;SAVE&nbsp;&nbsp;</a></div><br>
 <div class="save" ><a class='btn btn-info btn-small' onclick="clear_data();">&nbsp;CLEAR</a></div><br>
-<div class="save"><a class='btn btn-info btn-small'>&nbsp;LEARN</a></div><br>
+<div class="save"><a class='btn btn-success btn-small' onclick="learn();">&nbsp;LEARN</a></div><br>
+<div class="save"><a class="btn btn-primary btn-small" onclick="relearn_learnboard();">Relearn</a></div><br>
 <div class="save"><a class='btn btn-info btn-small' style='font-size:0.505em;' onclick="restore();">RESTORE</a></div><br>
 </div>

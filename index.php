@@ -35,6 +35,7 @@
 	<button class="brn btn-primary" onclick="account_settings();">Account Settings</button>
 	<a class="btn btn-success" href="scripts/php/accounts.php?action=logout">Logout</a><br>
 	<h2><?echo get_user_info("first_name",$_SESSION['id'])." ".get_user_info("last_name",$_SESSION['id']);?></h2>
+	<a id='buffer_state'>Buffer empty</a>
 	<?}?>
 </div>
 
@@ -57,6 +58,9 @@
 		$('#modal').modal('show');
 		document.getElementById("modal_header").innerHTML=header;
 		document.getElementById("modal_body").innerHTML=body;
+	}
+	function close_modal(){
+		$('#modal').modal('hide');
 	}
 </script>
 
@@ -85,6 +89,9 @@
 		document.getElementById("form_modal_body").innerHTML=body;
 		document.getElementById("form_modal_submit").value=submit;
 	}
+	function close_form_modal(){
+		$('#form_modal').modal('hide');
+	}
 </script>
 
 
@@ -93,6 +100,8 @@
 <?include("includes/player_controls.inc");?>
 <!--cloud control-->
 <?include("includes/cloud_control.inc");?>
+<!-- learn board -->
+<? include("includes/learnboard.inc");?>
 <?}?>
 <!--keyboard-->
 <? include("includes/keyboard.inc"); ?>

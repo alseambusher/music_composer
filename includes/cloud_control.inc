@@ -34,8 +34,93 @@
 	cursor:pointer;
 }
 </style>
+<script>
+	function my_music(order){
+		var xhr=new XMLHttpRequest();
+		load_modal("My music","<div id='my_music_results'>Fetching results.. wait..</div>");
+		var data_buffer='{}';
+		if(xhr){
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4){
+					if(xhr.status==200){
+						document.getElementById("my_music_results").innerHTML="<a class='btn' onclick='my_music(\"title\");'>Order by title </a>&nbsp;";
+						document.getElementById("my_music_results").innerHTML+="<a class='btn' onclick='my_music(\"genre\");'>Order by genre</a>&nbsp;";
+						document.getElementById("my_music_results").innerHTML+="<a class='btn' onclick='my_music(\"time\");'>Order by time</a>";
+						document.getElementById("my_music_results").innerHTML+=xhr.responseText;
+					}
+					else{
+						document.getElementById("my_music_results").innerHTML="Some error occured.. Try again!";
+					}
+				}
+			};
+			xhr.open("GET","scripts/php/save_load.php?action=my_music&order="+order);
+			xhr.send(null);
+		}
+	}
+	function extract_buffer(){
+		toggle_mode();
+		record_mode_DATA=data_buffer;
+		update_player_controls();
+	}
+	function share_unshare(isshare,id){//share or unshare async
+		var xhr=new XMLHttpRequest();
+		if(xhr){
+			xhr.open("GET","scripts/php/save_load.php?action="+isshare+"&id="+id);
+			xhr.send(null);
+		}
+	}
+	function delete_music(id){
+		var xhr=new XMLHttpRequest();
+		if(xhr){
+			xhr.open("GET","scripts/php/save_load.php?action=delete&id="+id);
+			xhr.send(null);
+		}
+	}
+	function all_music(order){
+		var xhr=new XMLHttpRequest();
+		load_modal("All music","<div id='all_music_results'>Fetching results.. wait..</div>");
+		var data_buffer='{}';
+		if(xhr){
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4){
+					if(xhr.status==200){
+						document.getElementById("all_music_results").innerHTML="<a class='btn' onclick='all_music(\"title\");'>Order by title </a>&nbsp;";
+						document.getElementById("all_music_results").innerHTML+="<a class='btn' onclick='all_music(\"genre\");'>Order by genre</a>&nbsp;";
+						document.getElementById("all_music_results").innerHTML+="<a class='btn' onclick='all_music(\"time\");'>Order by time</a>";
+						document.getElementById("all_music_results").innerHTML+=xhr.responseText;
+					}
+					else{
+						document.getElementById("all_music_results").innerHTML="Some error occured.. Try again!";
+					}
+				}
+			};
+			xhr.open("GET","scripts/php/save_load.php?action=all_music&order="+order);
+			xhr.send(null);
+		}
+	}
+	function update_search_bar(mode){
+	console.log(mode);
+		var xhr=new XMLHttpRequest();
+		if(xhr){
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4){
+					if(xhr.status==200){
+						document.getElementById("search_music_results").innerHTML=xhr.responseText;
+					}
+				}
+			};
+			xhr.open("GET","scripts/php/save_load.php?action=search&type="+mode+"&query="+document.getElementById("search_bar").value);
+			xhr.send(null);
+		}
+	}
+	function search_music(mode){
+		load_modal("Search "+mode,"<input type='text' id='search_bar'></input><div id='search_music_results'>results</div>");
+		document.getElementById("search_bar").onkeyup=function(){ update_search_bar(mode); };
+	}
+</script>
 <div id="cloud_control">
-<a class="btn btn-info">My music</a><br><br>
-<a class="btn btn-info">All music&nbsp;</a><br><br>
-<a class="btn btn-info">&nbsp;&nbsp; Search&nbsp;&nbsp;</a>
+<a class="btn btn-info" onclick="my_music('time');">My music</a><br><br>
+<a class="btn btn-info" onclick="all_music('time');">All music&nbsp;</a><br><br>
+<a class="btn btn-info" onclick="search_music('title');">&nbsp;<i class='icon-search'></i> Titles&nbsp;&nbsp;</a><br><br>
+<a class="btn btn-info" onclick="search_music('users');">&nbsp;<i class='icon-search'></i> Users&nbsp;&nbsp;</a>
 </div>
