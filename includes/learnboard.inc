@@ -10,14 +10,14 @@
 	-webkit-box-shadow: 0px 0px 20px rgba(0,0,0,.8);
    	-moz-box-shadow: 0px 0px 20px rgba(0,0,0,.8);
    	box-shadow: 0px 0px 20px rgba(0,0,0,.8);
-	background: rgb(191,210,85); /* Old browsers */
-background: -moz-linear-gradient(top, rgba(191,210,85,1) 0%, rgba(158,203,45,1) 36%, rgba(142,185,42,1) 50%); /* FF3.6+ */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(191,210,85,1)), color-stop(36%,rgba(158,203,45,1)), color-stop(50%,rgba(142,185,42,1))); /* Chrome,Safari4+ */
-background: -webkit-linear-gradient(top, rgba(191,210,85,1) 0%,rgba(158,203,45,1) 36%,rgba(142,185,42,1) 50%); /* Chrome10+,Safari5.1+ */
-background: -o-linear-gradient(top, rgba(191,210,85,1) 0%,rgba(158,203,45,1) 36%,rgba(142,185,42,1) 50%); /* Opera 11.10+ */
-background: -ms-linear-gradient(top, rgba(191,210,85,1) 0%,rgba(158,203,45,1) 36%,rgba(142,185,42,1) 50%); /* IE10+ */
-background: linear-gradient(to bottom, rgba(191,210,85,1) 0%,rgba(158,203,45,1) 36%,rgba(142,185,42,1) 50%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', endColorstr='#8eb92a',GradientType=0 ); /* IE6-9 */
+	background: rgb(0,110,46); /* Old browsers */
+background: -moz-linear-gradient(top, rgba(0,110,46,1) 0%, rgba(0,110,46,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,110,46,1)), color-stop(100%,rgba(0,110,46,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(0,110,46,1) 0%,rgba(0,110,46,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(0,110,46,1) 0%,rgba(0,110,46,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(0,110,46,1) 0%,rgba(0,110,46,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom, rgba(0,110,46,1) 0%,rgba(0,110,46,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006e2e', endColorstr='#006e2e',GradientType=0 ); /* IE6-9 */
 }
 #learnboard .playing{
 	font-size:1.4em;
@@ -27,7 +27,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfd255', end
 }
 #learnboard .dummy{
 	font-size:1.4em;
-	color:#777777;
+	color:#999999;
 	position:relative;
 	z-index:0;
 }
