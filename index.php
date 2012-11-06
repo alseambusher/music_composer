@@ -32,7 +32,7 @@
 	<button class='btn btn-success' onclick='load_form_modal("Enter your login details","scripts/php/accounts.php?action=login","<input name=\"login_username\" type=\"text\" placeholder=\"user name\"/><br><input name=\"login_password\"type=\"password\" placeholder=\"password\"/>","login");'>Login</button>
 
 	<?}else{?>
-	<button class="brn btn-primary" onclick="account_settings();">Account Settings</button>
+	<button class="btn btn-primary" onclick="account_settings();">Account Settings</button>
 	<a class="btn btn-success" href="scripts/php/accounts.php?action=logout">Logout</a><br>
 	<h2><?echo get_user_info("first_name",$_SESSION['id'])." ".get_user_info("last_name",$_SESSION['id']);?></h2>
 	<a id='buffer_state'>Buffer empty</a>

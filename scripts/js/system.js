@@ -2,6 +2,7 @@
 window.onload=init;
 function init(){
 	document.getElementById("keys").setAttribute("style","margin-left:"+($(window).width()-840)/2+"px;");
+	//document.getElementById("learnboard_holder").setAttribute("style","margin-left:"+($(window).width()-600)/2+"px;");
 }
 setTimeout("init();",10);
 var system_mode="KEYBOARD";

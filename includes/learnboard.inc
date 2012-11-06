@@ -2,7 +2,6 @@
 #learnboard{
 	border:10px solid #333333;
 	padding:5px;
-	margin:auto;
 	width:600px;
 	height:300px;
 	word-wrap:break-word;
@@ -39,6 +38,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006e2e', end
 </div>
 
 <script>
+	 document.getElementById("learnboard_holder").setAttribute("style","margin-left:"+($(window).width()-625)/2+"px;");
 	$("#learnboard_holder").toggle(0);
 	var learnboard_interrupt=false;
 	var learn_timer;
