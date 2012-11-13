@@ -106,7 +106,7 @@
 <!--keyboard-->
 <? include("includes/keyboard.inc"); ?>
 <!-- music libary -->
-<? include("includes/sounds.inc");?> 
+<? include("includes/sounds.inc");?>
 <!-- music handler -->
 <script src="scripts/js/music.js"></script>
 <script type="text/javascript">
